@@ -17,9 +17,10 @@ defmodule TwitchIrc do
   end
 
   def start_cowboy do
+    port = String.to_integer(System.get_env("PORT") || "8081")
     dispatch = :cowboy_router.compile(routes())
     {:ok, _} =
-      :cowboy.start_clear(:http_listener, 200, [port: 8081],
+      :cowboy.start_clear(:http_listener, 200, [port: port],
         %{env: %{dispatch: dispatch}})
   end
 
