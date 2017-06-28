@@ -12,7 +12,7 @@ defmodule TwitchIrc.Irc do
   @pass "oauth:" <> Application.get_env(:twitch_irc, :oauth_access_token)
   @name Application.get_env(:twitch_irc, :irc_name)
 
-  @kappa_regex Regex.compile!("Kappa")
+  @kappa_regex Regex.compile!("\\bKappa\\b")
 
   @update_timeout_seconds 15 * 1000
   @broadcast_timeout_seconds 1 * 1000
