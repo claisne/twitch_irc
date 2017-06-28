@@ -12,3 +12,4 @@ config :twitch_irc, irc_port: 443
 import_config "secret.exs"
 
 import_config "#{Mix.env}.exs"
+
