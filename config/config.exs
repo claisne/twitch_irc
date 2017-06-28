@@ -1,9 +1,5 @@
 use Mix.Config
 
-config :logger,
-  :console,
-  metadata: [:module]
-
 config :twitch_irc, irc_host: "irc.chat.twitch.tv"
 config :twitch_irc, irc_port: 443
 
@@ -15,3 +11,4 @@ config :twitch_irc, irc_port: 443
 # config :twitch_irc, irc_name: ""
 import_config "secret.exs"
 
+import_config "#{Mix.env}.exs"
