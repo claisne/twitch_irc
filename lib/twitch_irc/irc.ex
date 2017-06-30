@@ -120,9 +120,9 @@ defmodule TwitchIrc.Irc do
   end
 
   def handle_info({:received, message, _sender_info, "#" <> channel}, state) do
-    kappa_captures = Regex.run(@kappa_regex, message)
+    kappa_captures = Regex.scan(@kappa_regex, message, return: :index)
 
-    if is_nil(kappa_captures) do
+    if Enum.empty?(kappa_captures) do
       {:noreply, state}
     else
       channel_kappa =
