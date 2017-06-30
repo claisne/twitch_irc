@@ -30,8 +30,8 @@ defmodule TwitchIrc.Irc do
       |> Enum.map(fn {channel, channel_kappas} ->
           kappa_speed =
             channel_kappas
-            |> Enum.reject(fn {_kappa_count, time, _message} ->
-                  time < :os.system_time(:second) - 60
+            |> Enum.take_while(fn {_kappa_count, time, _message} ->
+                  time > :os.system_time(:second) - 60
                 end)
             |> Enum.map(fn {kappa_count, _time, _message} -> kappa_count end)
             |> Enum.sum
@@ -133,8 +133,8 @@ defmodule TwitchIrc.Irc do
       channels_kappas =
         Map.update!(state.channels_kappas, channel, fn channel_kappas ->
           [channel_kappa | channel_kappas]
-          |> Enum.reject(fn {_kappa_count, time, _message} ->
-               time < :os.system_time(:second) - 60
+          |> Enum.take_while(fn {_kappa_count, time, _message} ->
+               time > :os.system_time(:second) - 60
              end)
         end)
 
